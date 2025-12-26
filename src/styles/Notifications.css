@@ -1,0 +1,480 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+/* ======================================================
+   KEYFRAME ANIMATIONS
+   ====================================================== */
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes titlePop {
+  0% {
+    opacity: 0;
+    transform: translateX(-12px) rotate(-2deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(2px) rotate(1deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0);
+  }
+}
+
+@keyframes itemEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes avatarPulse {
+  0%, 100% {
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.45);
+  }
+  50% {
+    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.65);
+  }
+}
+
+@keyframes badgeBreath {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* ======================================================
+   NOTIFICATIONS CARD
+   ====================================================== */
+
+.notifications-card {
+  max-width: 1000px;
+  margin: 24px auto;
+  padding: 18px 20px;
+  background: radial-gradient(circle at top left, #eef2ff 0, #ffffff 40%, #f9fafb 100%);
+  border-radius: 20px;
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.16),
+    0 0 0 1px rgba(148, 163, 184, 0.2);
+  backdrop-filter: blur(6px);
+  animation: cardEnter 0.6s ease-out both;
+}
+
+/* ======================================================
+   HEADER
+   ====================================================== */
+
+.notifications-header {
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.notifications-title {
+  font-size: 35px;
+  font-family: 'Permanent Marker', cursive;
+  font-weight: 700;
+  margin: 0;
+  color: #0f172a;
+  letter-spacing: 0.01em;
+  animation: titlePop 0.7s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+/* ======================================================
+   MARK ALL AS READ BUTTON
+   ====================================================== */
+
+.notifications-mark-all-btn {
+  position: relative;
+  overflow: hidden;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease,
+    filter 0.15s ease;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.45);
+  white-space: nowrap;
+}
+
+.notifications-mark-all-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: translateX(-100%);
+}
+
+.notifications-mark-all-btn:not(:disabled):hover::after {
+  animation: shimmer 0.8s ease;
+}
+
+.notifications-mark-all-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  box-shadow: none;
+}
+
+.notifications-mark-all-btn:not(:disabled):hover {
+  filter: brightness(1.05);
+}
+
+.notifications-mark-all-btn:not(:disabled):active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 3px 10px rgba(79, 70, 229, 0.35);
+}
+
+/* ======================================================
+   STATUS / ERROR / EMPTY
+   ====================================================== */
+
+.notifications-status-text {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 10px;
+}
+
+.notifications-error {
+  color: #b91c1c;
+  background: #fef2f2;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  border: 1px solid #fecaca;
+}
+
+.notifications-empty {
+  color: #6b7280;
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+/* ======================================================
+   LIST
+   ====================================================== */
+
+.notifications-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ======================================================
+   NOTIFICATION ITEM
+   ====================================================== */
+
+.notifications-item {
+  display: flex;
+  gap: 12px;
+  padding: 10px 6px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 12px;
+  animation: itemEnter 0.45s ease-out both;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.notifications-item:nth-child(1) { animation-delay: 0.05s; }
+.notifications-item:nth-child(2) { animation-delay: 0.1s; }
+.notifications-item:nth-child(3) { animation-delay: 0.15s; }
+.notifications-item:nth-child(4) { animation-delay: 0.2s; }
+.notifications-item:nth-child(5) { animation-delay: 0.25s; }
+
+.notifications-item:last-child {
+  border-bottom: none;
+}
+
+.notifications-item-unread {
+  background: linear-gradient(
+    90deg,
+    rgba(239, 246, 255, 0.85),
+    rgba(255, 255, 255, 0.9)
+  );
+}
+
+.notifications-item:hover {
+  background: rgba(239, 246, 255, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
+.notifications-item-read {
+  opacity: 0.7;
+  filter: grayscale(0.4);
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+/* ======================================================
+   AVATAR
+   ====================================================== */
+
+.notifications-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at 30% 20%,
+    #a5b4fc 0,
+    #4f46e5 45%,
+    #312e81 100%
+  );
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  animation: avatarPulse 2.8s ease-in-out infinite;
+}
+
+.notifications-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+/* ======================================================
+   CONTENT
+   ====================================================== */
+
+.notifications-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.notifications-main-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.notifications-message {
+  font-size: 13px;
+  color: #0f172a;
+  line-height: 1.4;
+}
+
+/* NEW BADGE */
+.notifications-badge {
+  font-size: 11px;
+  color: #4f46e5;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 2px 7px;
+  background: rgba(238, 242, 255, 0.9);
+  border: 1px solid rgba(129, 140, 248, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  animation: badgeBreath 1.8s ease-in-out infinite;
+}
+
+/* ======================================================
+   META ROW
+   ====================================================== */
+
+.notifications-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 2px;
+  gap: 8px;
+}
+
+.notifications-timestamp {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* MARK READ BUTTON */
+.notifications-mark-btn {
+  padding: 3px 8px;
+  margin-left: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(129, 140, 248, 0.7);
+  background: rgba(238, 242, 255, 0.8);
+  color: #4f46e5;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.1s ease,
+    box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+
+.notifications-mark-btn:hover {
+  background: #4f46e5;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.5);
+}
+
+.notifications-mark-btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.4);
+}
+
+/* ======================================================
+   RESPONSIVE
+   ====================================================== */
+
+@media (max-width: 640px) {
+  .notifications-card {
+    padding: 14px 12px;
+    margin: 16px auto;
+    border-radius: 16px;
+  }
+
+  .notifications-title {
+    font-size: 19px;
+  }
+
+  .notifications-main-row,
+  .notifications-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .notifications-timestamp {
+    font-size: 10px;
+  }
+
+  .notifications-mark-btn {
+    margin-left: 0;
+  }
+}
+
+/* ======================================================
+   DARK MODE — NOTIFICATIONS
+   ====================================================== */
+
+body.theme-dark .notifications-card {
+  background:
+    radial-gradient(circle at top left, rgba(15, 23, 42, 1) 0, #020617 50%, #000000 100%);
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(30, 64, 175, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+body.theme-dark .notifications-title {
+  color: #f9fafb;
+  text-shadow: 0 0 10px rgba(129, 140, 248, 0.6);
+}
+
+body.theme-dark .notifications-mark-all-btn {
+  background: linear-gradient(135deg, #6366f1, #22c55e);
+  box-shadow: 0 10px 26px rgba(34, 197, 94, 0.5);
+}
+
+body.theme-dark .notifications-status-text {
+  color: #e5e7eb;
+}
+
+body.theme-dark .notifications-error {
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.35);
+  border-color: #fecaca;
+}
+
+body.theme-dark .notifications-empty {
+  color: #9ca3af;
+}
+
+body.theme-dark .notifications-item {
+  border-bottom-color: rgba(31, 41, 55, 0.9);
+}
+
+body.theme-dark .notifications-item-unread {
+  background: linear-gradient(
+    90deg,
+    rgba(30, 64, 175, 0.45),
+    rgba(15, 23, 42, 0.95)
+  );
+}
+
+body.theme-dark .notifications-item:hover {
+  background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.32), #020617);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.95);
+}
+
+body.theme-dark .notifications-avatar {
+  background: radial-gradient(circle at 30% 20%, #a5b4fc, #6366f1, #22c55e);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.7);
+}
+
+body.theme-dark .notifications-message {
+  color: #e5e7eb;
+}
+
+body.theme-dark .notifications-badge {
+  color: #e0e7ff;
+  background: rgba(30, 64, 175, 0.85);
+  border-color: rgba(129, 140, 248, 0.7);
+}
+
+body.theme-dark .notifications-meta-row,
+body.theme-dark .notifications-timestamp {
+  color: #9ca3af;
+}
+
+body.theme-dark .notifications-mark-btn {
+  border-color: rgba(129, 140, 248, 0.9);
+  background: rgba(30, 64, 175, 0.6);
+  color: #e0e7ff;
+}
+
+body.theme-dark .notifications-mark-btn:hover {
+  background: linear-gradient(135deg, #4f46e5, #22c55e);
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(34, 197, 94, 0.5);
+}

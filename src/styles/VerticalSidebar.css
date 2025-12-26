@@ -1,0 +1,349 @@
+:root {
+  --sidebar-width: 240px;
+  --sidebar-collapsed: 70px;
+  --bg: #f2f3f5;
+  --white: #fff;
+  --text: #333;
+  --muted: #777;
+  --primary: #4f46e5;
+}
+
+* {
+  box-sizing: border-box;
+  background: none;
+
+}
+
+.sidebar-wrapper {
+  display: flex;
+  height:100%;
+  opacity: 0;
+  background: none ;
+  animation: lefttoright 1s ease-in-out forwards;
+  animation-delay: 1s;
+  overflow-y: auto;
+  border-top-right-radius: 30px;
+border-top: 5px solid rgb(200, 200, 200);
+border-right: 5px solid rgb(200, 200, 200);
+border-bottom: none;
+border-left: none;
+
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--white);
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s ease;
+
+}
+
+.sidebar-wrapper.collapsed .sidebar {
+  width: var(--sidebar-collapsed);
+}
+
+/* BRAND */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  padding-right: 44px;         /* space reserved for toggle button */
+  border-bottom: 1px solid #eee;
+  position: relative;          /* so toggle-btn can be positioned inside */
+  opacity: 0;
+  animation: lefttoright 1s ease-in-out forwards;  
+  animation-delay: 1.5s;
+}
+
+
+.sidebar-logo {
+  width: 42px;        /* ✅ size */
+  height: 42px;       /* ✅ size */
+  min-width: 42px;    /* ✅ prevents shrinking */
+  border-radius: 999px;
+  background: #a855f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-weight: 700;
+  color: white;
+  font-size: 16px;
+}
+
+
+/* image inside logo circle */
+.sidebar-logo-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  object-fit: cover;
+  display: block;
+}
+
+
+
+.username {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sidebar-wrapper.collapsed .username {
+  display: none;
+}
+
+/* TOGGLE BUTTON – visible & stays inside brand box */
+.toggle-btn {
+  position: absolute;
+  right: 15px;                 /* pull in from right edge */
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  font-size: 22px;             /* icon size */
+  font-weight: 700;
+  color: #111827;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+
+
+.toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  transform: translate(-1px, -50%);
+}
+
+.sidebar-wrapper.collapsed .toggle-btn {
+  font-size: 24px;             /* slightly larger when collapsed */
+}
+
+/* NAVIGATION */
+.nav {
+  padding: 10px;
+  flex: 1;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 6px;
+  opacity: 0;
+}
+.nav-link:nth-child(1) {
+  animation: lefttoright 1s ease-in-out forwards;
+  animation-delay: 2s;
+}
+.nav-link:nth-child(2) {
+  animation: lefttoright 1s ease-in-out forwards;
+  animation-delay: 2.25s;
+}
+.nav-link:nth-child(3) {
+  animation: lefttoright 1s ease-in-out forwards;
+  animation-delay: 2.5s;
+}
+.nav-link:nth-child(4) {
+  animation: lefttoright 1s ease-in-out forwards;
+  animation-delay: 2.75s;
+}
+.nav-link:nth-child(5) {
+  animation: lefttoright 1s ease-in-out forwards;
+  animation-delay: 3s;
+}
+.nav-link:nth-child(6) {
+  animation: lefttoright 1s ease-in-out forwards;
+  animation-delay: 3.25s;
+}
+.nav-link:nth-child(7) {
+  animation: lefttoright 1s ease-in-out forwards;
+  animation-delay: 3.5s;
+}
+.nav-link:nth-child(8) {
+  animation: lefttoright 1s ease-in-out forwards;
+  animation-delay: 3.75s;
+}
+
+.nav-link:hover {
+  background: #f3f4f6;
+}
+
+
+.nav-link.active {
+  background: #eef2ff;
+  color: var(--primary);
+}
+
+
+.icon {
+  width: 24px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.sidebar-wrapper.collapsed .label {
+  display: none;
+}
+
+.badge {
+  background: red;
+  color: white;
+  padding: 1px 8px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-left: auto;
+}
+
+.sidebar-wrapper.collapsed .badge {
+  display: none;
+}
+
+/* CONTENT AREA */
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== DARK THEME ===== */
+/* ======================================
+   SIDEBAR – DARK THEME
+   ====================================== */
+
+body.theme-dark {
+  --bg: #020617;
+  --white: #020617;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --primary: #6366f1;
+}
+
+/* Wrapper */
+body.theme-dark .sidebar-wrapper {
+  background: #020617;
+  border-top: 5px solid rgb(47, 4, 156);
+border-right: 5px solid rgb(47, 4, 156);
+}
+
+/* Sidebar */
+body.theme-dark .sidebar {
+  background: #020617;
+  border-right: 1px solid #1f2937;
+}
+
+/* Brand */
+body.theme-dark .brand {
+  background: #020617;
+  border-bottom: 1px solid #1f2937;
+}
+
+/* Logo */
+body.theme-dark .sidebar-logo {
+  background: linear-gradient(135deg, #6366f1, #22c55e);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.6);
+}
+
+/* Username */
+body.theme-dark .username {
+  color: #f9fafb;
+}
+
+/* Toggle button */
+body.theme-dark .toggle-btn {
+  color: #e5e7eb;
+}
+
+body.theme-dark .toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Navigation links */
+body.theme-dark .nav-link {
+  color: #cbd5f5;
+}
+
+body.theme-dark .nav-link:hover {
+  background: rgba(99, 102, 241, 0.15);
+}
+
+body.theme-dark .nav-link.active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.35), rgba(34, 197, 94, 0.3));
+  color: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(129, 140, 248, 0.5);
+}
+
+/* Icons */
+body.theme-dark .icon {
+  color: #a5b4fc;
+}
+
+/* Badge */
+body.theme-dark .badge {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #ffffff;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.6);
+}
+
+/* Content area */
+body.theme-dark .content {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+/* Scrollbar (optional polish) */
+body.theme-dark .content::-webkit-scrollbar {
+  width: 6px;
+}
+
+body.theme-dark .content::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 999px;
+}
+
+
+
+@keyframes lefttoright {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

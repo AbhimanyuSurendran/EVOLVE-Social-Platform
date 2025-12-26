@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/assets/EVOLVE.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>social-platform</title>
+
+    <style>
+      /* ===============================
+         MOBILE BLOCK OVERLAY
+         (Does NOT interrupt #root)
+         =============================== */
+
+      .mobile-block-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(
+          circle at top,
+          #0f172a,
+          #020617 70%
+        );
+        color: #e5e7eb;
+        font-family: "Poppins", system-ui, sans-serif;
+        text-align: center;
+        padding: 24px;
+      }
+
+      .mobile-block-card {
+        max-width: 420px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(20px);
+        border-radius: 28px;
+        padding: 32px 26px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+        animation: floatIn 0.9s ease forwards;
+      }
+
+      .mobile-icon {
+        font-size: 52px;
+        margin-bottom: 14px;
+        animation: pulse 2s infinite ease-in-out;
+      }
+
+      .mobile-block-title {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        letter-spacing: 0.3px;
+      }
+
+      .mobile-block-text {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #cbd5f5;
+        margin-bottom: 22px;
+      }
+
+      .mobile-block-hint {
+        font-size: 13px;
+        opacity: 0.75;
+      }
+
+      /* Animations */
+      @keyframes floatIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px) scale(0.96);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.9;
+        }
+        50% {
+          transform: scale(1.08);
+          opacity: 1;
+        }
+      }
+
+      /* ===============================
+         SHOW OVERLAY ONLY ON MOBILE
+         =============================== */
+      @media (max-width: 768px) {
+        .mobile-block-overlay {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- React root stays untouched -->
+    <div id="root"></div>
+
+    <!-- Mobile-only overlay -->
+    <div class="mobile-block-overlay">
+      <div class="mobile-block-card">
+        <div class="mobile-icon">📱</div>
+        <div class="mobile-block-title">Desktop Experience Only</div>
+        <div class="mobile-block-text">
+          EVOLVE is crafted for a larger screen to deliver the best
+          visual and interactive experience.
+        </div>
+        <div class="mobile-block-hint">
+          Please open this app on a laptop or desktop browser.
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

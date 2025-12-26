@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+.navbar {
+  width: 100%;
+  height: 100px;
+background: linear-gradient(90deg, #ffffff,#ffffff, #d3d3d3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 26px;
+border-bottom: 5px solid rgb(200, 200, 200);
+  border-bottom-right-radius: 50px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  opacity: 0;
+  animation: navtoptobottom 1s forwards;
+}
+@keyframes navtoptobottom{
+  0%{
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* LEFT SECTION */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* so both left and right sections align the same */
+  gap: 10px;
+}
+
+
+.navbar-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  animation: toptobottom 1s ease-in-out;
+}
+
+
+.navbar-title {
+  font-size: 40px;
+  font-weight: bold;
+  color: #111827;
+  font-family: 'Permanent Marker', cursive;
+  opacity: 0;
+  animation: lefttoright 0.5s ease-in-out forwards;
+  animation-delay: 1s;
+}
+
+
+/* RIGHT SECTION */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centers content horizontally inside its area */
+  gap: 16px;
+  height: 100%; /* takes full navbar height so items center vertically */
+}
+
+
+.navbar-username {
+  font-size: 24px;
+  font-weight: bold;
+  color: #374151;
+  font-family: 'Permanent Marker', cursive;
+  opacity: 0;
+  animation: righttoleft 1s ease-in-out forwards;
+  animation-delay: 1s;
+}
+
+
+.navbar-logout {
+  padding: 10px 22px;      /* slightly taller */
+  font-size: 15px;
+    background: #ff0000;
+  border: none;
+  color: white;
+  border-radius: 50px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  animation: fadein 1s ease-in-out forwards;
+  animation-delay: 2s;
+}
+
+
+.navbar-logout:hover {
+  transform: scale(1.1);
+  background: #ff5e5e;
+}
+
+
+
+
+
+
+
+
+/* =========================================
+   NAVBAR – DARK MODE ONLY
+   ========================================= */
+
+body.theme-dark .navbar {
+  background: linear-gradient(90deg, #020617, #030712, #020617);
+  border-bottom: 5px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.85);
+}
+
+/* LEFT SECTION */
+body.theme-dark .navbar-left {
+  color: #f9fafb;
+}
+
+/* LOGO */
+body.theme-dark .navbar-logo {
+  box-shadow: 
+    0 0 0 2px rgba(99, 102, 241, 0.45),
+    0 0 22px rgba(129, 140, 248, 0.55);
+}
+
+/* TITLE */
+body.theme-dark .navbar-title {
+  color: #f8fafc;
+  text-shadow: 
+    0 0 12px rgba(99, 102, 241, 0.55),
+    0 0 22px rgba(129, 140, 248, 0.4);
+}
+
+/* RIGHT SECTION */
+body.theme-dark .navbar-right {
+  color: #e5e7eb;
+}
+
+/* USERNAME */
+body.theme-dark .navbar-username {
+  color: #d1d5db;
+  text-shadow: 0 0 6px rgba(99, 102, 241, 0.35);
+}
+
+/* LOGOUT BUTTON */
+body.theme-dark .navbar-logout {
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+  color: #ffffff;
+  box-shadow: 0 10px 26px rgba(220, 38, 38, 0.7);
+  border: 1px solid rgba(248, 113, 113, 0.45);
+}
+
+/* LOGOUT HOVER */
+body.theme-dark .navbar-logout:hover {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(248, 113, 113, 0.8);
+}
+
+
+@keyframes toptobottom {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lefttoright {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  25% {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes righttoleft {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  50% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

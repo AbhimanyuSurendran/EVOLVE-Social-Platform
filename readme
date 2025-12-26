@@ -1,0 +1,90 @@
+-- Social Media Platform Database Schema
+
+create database social_platform;
+use social_platform;
+-- Users
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  display_name VARCHAR(100),
+  bio TEXT,
+  profile_link_type	varchar(50),
+  profile_link	varchar(500),
+  avatar_url VARCHAR(500),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+select * from users;
+-- Posts
+CREATE TABLE posts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  content TEXT,
+  image_url VARCHAR(500),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+select * from posts;
+-- Followers (who follows whom)
+CREATE TABLE followers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  follower_id INT NOT NULL,
+  following_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY unique_follow (follower_id, following_id),
+  FOREIGN KEY (follower_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (following_id) REFERENCES users(id) ON DELETE CASCADE
+);
+select * from followers;
+
+-- Likes
+CREATE TABLE likes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  post_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY unique_like (user_id, post_id),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+);
+select * from likes;
+
+-- Comments
+CREATE TABLE comments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  post_id INT NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+);
+select * from comments;
+
+-- Notifications
+CREATE TABLE notifications (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,       -- who receives notification
+  actor_id INT,               -- who triggered it
+  type VARCHAR(50) NOT NULL,  -- 'like','comment','follow'
+  post_id INT NULL,
+  comment_id INT NULL,
+  is_read BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (actor_id) REFERENCES users(id) ON DELETE cascade,
+  FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE cascade,
+  FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE cascade
+);
+select * from notifications;
+
+-- Useful indexes
+CREATE INDEX idx_posts_user ON posts(user_id);
+CREATE INDEX idx_comments_post ON comments(post_id);
+CREATE INDEX idx_likes_post ON likes(post_id);
+CREATE INDEX idx_notifications_user ON notifications(user_id);
+
+
+
+

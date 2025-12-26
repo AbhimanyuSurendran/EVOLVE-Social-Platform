@@ -1,0 +1,58 @@
+/* ========== GLOBAL RESET ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Smooth text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove outline on click (optional) */
+button, input {
+  outline: none;
+}
+
+
+/* Scrollbar optional styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+/* ========== APP WRAPPER ========== */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* beautiful gradient background */
+  background:
+    radial-gradient(circle at 20% 20%, #17263c 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, #25173c 0%, transparent 40%),
+    linear-gradient(180deg, #0a0f16, #0d1117);
+  padding: 40px 20px;
+}
+
+/* Centered content wrapper (OPTIONAL if you need one) */
+.app-inner {
+  width: 100%;
+  max-width: 1300px;
+  margin: auto;
+}

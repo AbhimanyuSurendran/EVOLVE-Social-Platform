@@ -1,0 +1,592 @@
+/* ==============================
+   USERS PAGE LAYOUT
+   ============================== */
+
+.users-page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 12px; /* small side padding for large screens too */
+}
+
+/* Common shell for search + results + profile view */
+.users-shell {
+  max-width: 720px;         /* ✅ search bar & results same width */
+  margin: 0 auto;
+}
+
+/* Title override (optional) */
+.users-title {
+  margin-bottom: 10px;
+}
+
+/* ==============================
+   SEARCH BAR
+   ============================== */
+
+.users-search-wrapper {
+  margin-bottom: 16px;
+}
+
+.users-search-input {
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  outline: none;
+  background: #f9fafb;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.users-search-input::placeholder {
+  color: #9ca3af;
+}
+
+.users-search-input:focus {
+  background: #ffffff;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.14);
+}
+
+.users-search-meta {
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.users-search-meta--info {
+  color: #6b7280;
+}
+
+.users-search-meta--error {
+  color: crimson;
+}
+
+/* “No results” text */
+.users-empty-text {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+
+/* ==============================
+   SEARCH RESULTS LIST
+   ============================== */
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Each user row */
+.users-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+}
+
+/* Left side: avatar + name */
+.users-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  min-width: 0; /* helps text truncate nicely */
+}
+
+/* Avatar specific to Users page */
+.users-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #4f46e5, #a855f7);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.users-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Text section */
+.users-item-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.users-item-username {
+  font-weight: 600;
+  font-size: 14px;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.users-item-handle {
+  font-size: 13px;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Right side: Follow / Unfollow */
+.users-item-actions {
+  flex-shrink: 0;
+}
+
+.users-follow-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #4f46e5;
+  background: transparent;
+  color: #4f46e5;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.users-follow-btn.following {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+.users-follow-btn:hover {
+  opacity: 0.9;
+}
+
+
+/* ==============================
+   PROFILE VIEW PARTS
+   ============================== */
+
+.users-error-text {
+  color: crimson;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+/* Back button above profile */
+.users-back-btn {
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #0066ff;
+  background: #000000;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: 0.15s ease;
+}
+
+.users-back-btn:hover {
+  opacity: 0.9;
+}
+
+/* “No posts” text in profile view */
+.users-no-posts-text {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Row holding Follow + Message buttons */
+.profile-actions-row {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;   /* aligns both vertically */
+  gap: 12px;             /* equal spacing */
+}
+
+/* FOLLOW + MESSAGE buttons (same style & height) */
+.profile-edit-btn,
+.profile-message-btn {
+  height: 38px;
+  line-height: 38px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid #111827;
+  background: #111827;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease,
+    transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+/* FOLLOWING state (Follow button toggled) */
+.profile-edit-btn.following {
+  background: #ffffff;
+  color: #111827;
+}
+
+/* Hover effect for both */
+.profile-edit-btn:hover,
+.profile-message-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.25);
+}
+
+/* Active click */
+.profile-edit-btn:active,
+.profile-message-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.25);
+}
+
+
+/* ==============================
+   RESPONSIVE
+   ============================== */
+
+@media (max-width: 768px) {
+  .users-page {
+    max-width: 100%;
+    padding: 0 8px;
+  }
+
+  .users-shell {
+    max-width: 100%;
+    padding: 0 4px;
+  }
+
+  .users-item {
+    padding: 8px 10px;
+    border-radius: 12px;
+  }
+
+  .users-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .users-item-username {
+    font-size: 13px;
+  }
+
+  .users-item-handle {
+    font-size: 12px;
+  }
+
+  .users-follow-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .profile-actions-row {
+    gap: 8px;
+  }
+
+  .profile-edit-btn,
+  .profile-message-btn {
+    height: 34px;
+    line-height: 34px;
+    padding: 0 18px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .users-item {
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .users-item-left {
+    flex: 1;
+  }
+
+  .users-follow-btn {
+    white-space: nowrap;
+  }
+
+  .users-search-input {
+    padding: 9px 13px;
+    font-size: 13px;
+  }
+
+  .profile-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .profile-edit-btn,
+  .profile-message-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==============================
+   DARK THEME SUPPORT
+   ============================== */
+   
+   /* ==============================
+   DARK MODE — USERS PAGE LAYOUT
+   ============================== */
+
+body.theme-dark .users-page {
+  color: #e5e7eb;
+}
+
+
+
+/* Title */
+body.theme-dark .users-title {
+  color: #f9fafb;
+}
+
+
+/* ==============================
+   DARK MODE — SEARCH BAR
+   ============================== */
+
+
+
+body.theme-dark .users-search-input {
+  background: #020617;
+  border-color: #1f2937;
+  color: #e5e7eb;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9);
+}
+
+body.theme-dark .users-search-input::placeholder {
+  color: #6b7280;
+}
+
+body.theme-dark .users-search-input:focus {
+  background: #020617;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.5);
+}
+
+body.theme-dark .users-search-meta--info {
+  color: #9ca3af;
+}
+
+body.theme-dark .users-search-meta--error {
+  color: #fca5a5;
+}
+
+body.theme-dark .users-empty-text {
+  color: #9ca3af;
+}
+
+
+/* ==============================
+   DARK MODE — SEARCH RESULTS LIST
+   ============================== */
+
+
+/* Each user row */
+body.theme-dark .users-item {
+  background: radial-gradient(circle at top left, rgba(31, 41, 55, 0.95), #020617);
+  border-color: rgba(55, 65, 81, 0.9);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.9);
+}
+
+/* Left side */
+body.theme-dark .users-item-left {
+  color: #e5e7eb;
+}
+
+/* Avatar */
+body.theme-dark .users-avatar {
+  background: linear-gradient(135deg, #6366f1, #22c55e);
+  color: #f9fafb;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.65);
+}
+
+/* Text section */
+body.theme-dark .users-item-username {
+  color: #f9fafb;
+}
+
+body.theme-dark .users-item-handle {
+  color: #9ca3af;
+}
+
+/* Follow button */
+body.theme-dark .users-follow-btn {
+  border-color: #818cf8;
+  color: #c7d2fe;
+  background: transparent;
+}
+
+body.theme-dark .users-follow-btn.following {
+  background: linear-gradient(135deg, #4f46e5, #22c55e);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+body.theme-dark .users-follow-btn:hover {
+  opacity: 0.95;
+}
+
+
+/* ==============================
+   DARK MODE — PROFILE VIEW PARTS
+   ============================== */
+
+body.theme-dark .users-error-text {
+  color: #fecaca;
+}
+
+/* Back button above profile */
+body.theme-dark .users-back-btn {
+  border-color: #22c55e;
+  background: #020617;
+  color: #e5e7eb;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.9);
+}
+
+body.theme-dark .users-back-btn:hover {
+  opacity: 1;
+  background: #0b1120;
+}
+
+/* “No posts” text in profile view */
+body.theme-dark .users-no-posts-text {
+  color: #9ca3af;
+}
+
+/* Profile actions row */
+
+
+/* FOLLOW + MESSAGE buttons */
+body.theme-dark .profile-edit-btn,
+body.theme-dark .profile-message-btn {
+  border-color: #0f172a;
+  background: linear-gradient(135deg, #0f172a, #111827);
+  color: #f9fafb;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.9);
+      border: 1px solid #ffffff;
+
+}
+
+body.theme-dark .profile-edit-btn.following {
+  background: #f9fafb;
+  color: #111827;
+  box-shadow: 0 6px 16px rgba(249, 250, 251, 0.16);
+}
+body.theme-dark .profile-edit-btn.following:hover{
+    background: #002c49;
+
+color: white;
+}
+body.theme-dark .profile-edit-btn:hover,
+body.theme-dark .profile-message-btn:hover {
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 1);
+}
+
+body.theme-dark .profile-edit-btn:active,
+body.theme-dark .profile-message-btn:active {
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.8);
+}
+
+
+/* ==============================
+   DARK MODE — RESPONSIVE
+   ============================== */
+
+@media (max-width: 768px) {
+  body.theme-dark .users-page {
+    max-width: 100%;
+    padding: 0 8px;
+  }
+
+  body.theme-dark .users-shell {
+    max-width: 100%;
+    padding: 0 4px;
+  }
+
+  body.theme-dark .users-item {
+    padding: 8px 10px;
+    border-radius: 12px;
+  }
+
+  body.theme-dark .users-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  body.theme-dark .users-follow-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  body.theme-dark .profile-edit-btn,
+  body.theme-dark .profile-message-btn {
+    height: 34px;
+    line-height: 34px;
+    padding: 0 18px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  body.theme-dark .users-item {
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  body.theme-dark .users-follow-btn {
+    white-space: nowrap;
+  }
+
+  body.theme-dark .users-search-input {
+    padding: 9px 13px;
+    font-size: 13px;
+  }
+
+  body.theme-dark .profile-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  body.theme-dark .profile-edit-btn,
+  body.theme-dark .profile-message-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

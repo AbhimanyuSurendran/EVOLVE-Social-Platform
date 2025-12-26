@@ -1,0 +1,312 @@
+/* ========================================
+   DASHBOARD LAYOUT – BASE (LIGHT THEME)
+   ======================================== */
+
+.dashboard-layout {
+  position: fixed;              /* fill entire viewport independently of body */
+  inset: 0;
+  display: flex;
+  flex-direction: column;       /* Navbar on top */
+  width: 100vw;
+  height: 100vh;
+background-color: #ffffff; 
+ overflow: hidden;             /* important for starfield */
+}
+
+/* Keep layout above starfield by default */
+.dashboard-body,
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ========================================
+   STARFIELD (USED BY BOTH THEMES)
+   ======================================== */
+
+.dashboard-starfield {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1; /* under content but above background */
+  overflow: hidden;
+}
+
+/* Single star – position, size, timing come from inline style in JSX */
+.dashboard-star {
+  position: absolute;
+  display: block;
+  border-radius: 999px;
+  width: 3px;          /* fallback in case inline style fails */
+  height: 3px;         /* fallback */
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.75);
+  opacity: 0.8;
+  animation-name: dashboard-star-twinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Twinkle animation */
+@keyframes dashboard-star-twinkle {
+  0% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+}
+
+/* Central soft glow / explosion */
+.dashboard-explosion {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 260px;
+  height: 260px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 65%);
+  opacity: 0;
+  transform: scale(0.7);
+  pointer-events: none;
+}
+
+/* Explosion animation – we’ll trigger in dark mode */
+@keyframes dashboard-explode {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+}
+
+/* ========================================
+   MAIN LAYOUT
+   ======================================== */
+
+/* Area under navbar: sidebar + content side by side */
+.dashboard-body {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+}
+
+/* Sidebar wrapper comes from VerticalSidebar */
+.dashboard-body .sidebar-wrapper {
+  flex-shrink: 0;
+}
+
+/* Main content area (right side) */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+/* Header block (your welcome text) */
+.landing-container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto 24px auto;
+  padding: 16px 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
+
+.landing-container h1 {
+  margin-bottom: 8px;
+}
+
+.landing-container p {
+  margin: 0;
+  color: #4b5563;
+}
+
+/* Center the pages rendered via <Outlet /> inside the content area */
+.content > *:not(.landing-container) {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto 16px auto;
+}
+
+/* Logout button */
+.logout-btn {
+  margin-top: 16px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #ef4444;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ========================================
+   RESPONSIVE (LIGHT)
+   ======================================== */
+
+@media (max-width: 900px) {
+  .content {
+    padding: 16px;
+  }
+
+  .landing-container {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-body {
+    flex-direction: column;
+  }
+
+  .dashboard-body .sidebar-wrapper {
+    width: 100%;
+    height: auto;
+  }
+
+  .content {
+    padding: 12px;
+  }
+
+  .landing-container {
+    margin-bottom: 16px;
+  }
+}
+
+/* ========================================
+   DARK MODE – STARFIELD + BACKGROUND
+   ======================================== */
+
+body.theme-dark .dashboard-layout {
+  background: radial-gradient(circle at top, #020617 0, #020617 55%, #000000 100%);
+  color: #e5e7eb;
+}
+
+/* Make stars brighter on dark background */
+body.theme-dark .dashboard-star {
+  background: #f9fafb;
+  box-shadow: 0 0 14px rgba(248, 250, 252, 0.95);
+  opacity: 0.95;
+}
+
+/* Trigger the explosion only in dark mode */
+body.theme-dark .dashboard-explosion {
+  animation: dashboard-explode 0.9s ease-out forwards;
+}
+
+/* Sidebar wrapper – subtle gradient */
+body.theme-dark .dashboard-body .sidebar-wrapper {
+  background: linear-gradient(160deg, rgba(59, 130, 246, 0.14), rgba(2, 6, 23, 0.98));
+  box-shadow: inset 0 0 0 1px rgba(30, 64, 175, 0.4);
+}
+
+/* Main content area */
+body.theme-dark .content {
+  background: none;
+  color: #e5e7eb;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.6) transparent;
+}
+
+/* Scrollbar styling */
+body.theme-dark .content::-webkit-scrollbar {
+  width: 8px;
+}
+
+body.theme-dark .content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body.theme-dark .content::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(180deg, #6366f1, #22c55e);
+}
+
+/* Header container */
+body.theme-dark .landing-container {
+  background: linear-gradient(145deg, rgba(30, 64, 175, 0.75), rgba(15, 23, 42, 0.98));
+  border-radius: 16px;
+  border: 1px solid rgba(30, 64, 175, 0.7);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+}
+
+/* Header title */
+body.theme-dark .landing-container h1 {
+  color: #f9fafb;
+  text-shadow: 0 0 16px rgba(129, 140, 248, 0.7);
+  letter-spacing: 0.03em;
+}
+
+/* Subtitle text */
+body.theme-dark .landing-container p {
+  color: #9ca3af;
+}
+
+/* Content wrappers from Outlet */
+body.theme-dark .content > *:not(.landing-container) {
+  border-radius: 18px;
+
+  padding: 18px 20px;
+}
+
+/* Logout button */
+body.theme-dark .logout-btn {
+  background: linear-gradient(135deg, #f97373, #dc2626);
+  color: #fff;
+  box-shadow: 0 12px 25px rgba(220, 38, 38, 0.65);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+body.theme-dark .logout-btn:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 0 18px rgba(248, 113, 113, 0.7);
+}
+
+/* ========================================
+   DARK MODE – RESPONSIVE
+   ======================================== */
+
+@media (max-width: 900px) {
+  body.theme-dark .content {
+    padding: 16px;
+  }
+
+  body.theme-dark .landing-container {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  body.theme-dark .dashboard-body {
+    flex-direction: column;
+  }
+
+  body.theme-dark .dashboard-body .sidebar-wrapper {
+    width: 100%;
+    height: auto;
+  }
+
+  body.theme-dark .content {
+    padding: 12px;
+  }
+
+  body.theme-dark .landing-container {
+    margin-bottom: 16px;
+  }
+}

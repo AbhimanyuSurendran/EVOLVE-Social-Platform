@@ -1,0 +1,596 @@
+
+
+.feed-page {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+
+}
+
+
+/* Page title */
+.feed-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+/* List of posts */
+.feed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===== FEED CARD ===== */
+.feed-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px 18px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+  max-width: 720px;          /* card not too wide */
+  margin: 0 auto;            /* center the card in the feed-page */
+}
+
+/* Top row: avatar + username + follow btn */
+.feed-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.feed-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feed-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #4f46e5;
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;          /* important for round image clipping */
+}
+
+/* avatar image inside feed avatar */
+.feed-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  object-fit: cover;
+  display: block;
+}
+
+.feed-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.feed-username {
+  font-weight: 600;
+  font-size: 15px;
+  color: #111827;
+}
+
+/* Follow / Unfollow button */
+.follow-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #4f46e5;
+  background: transparent;
+  color: #4f46e5;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.follow-btn.following {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+.follow-btn:hover {
+  opacity: 0.9;
+}
+
+/* ===== POST IMAGE (fixed, smaller, clean) ===== */
+.feed-image-wrapper {
+  margin: 10px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f3f4f6;
+  display: flex;
+  justify-content: center;
+}
+
+.feed-image {
+  width: 100%;
+  height: auto;
+  max-height: 280px;     /* smaller image height */
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ===== ACTIONS ROW (LIKE / COMMENT) ===== */
+.feed-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.like-btn,
+.comment-btn {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  background: #c99dff;
+  color: #111827;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.5s ease;
+}
+.like-btn:hover,
+.comment-btn:hover {
+transform: scale(1.1) translateY(-3px);}
+
+.like-btn.liked {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.count-text {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* ===== DESCRIPTION ===== */
+.feed-description {
+  font-size: 14px;
+  color: #374151;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* ===== SMALL STATES ===== */
+.feed-page p {
+  font-size: 14px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .feed-card {
+    padding: 12px 14px;
+    border-radius: 12px;
+    max-width: 100%;      /* use full width on small screens */
+  }
+
+  .feed-title {
+    font-size: 20px;
+  }
+
+  .feed-actions {
+    gap: 8px;
+  }
+
+  .follow-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .feed-image {
+    max-height: 220px;   /* a bit smaller on mobile */
+  }
+}
+
+/* ===========================================================
+   FEED + COMMENTS LAYOUT (Feed.jsx + Comments.jsx)
+   =========================================================== */
+
+/* The same div has class "feed-page feed-layout" in Feed.jsx */
+.feed-layout {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  max-width: 2000px;        /* a bit wider to fit comments panel */
+}
+
+/* Left side: posts */
+.feed-main {
+  flex: 2;
+}
+
+/* Right side: comments panel */
+.comments-panel {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+  /* sticky side panel */
+  position: sticky;
+  top: 50px;                 /* adjust based on your header height */
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+/* Comments header */
+.comments-header {
+  margin-bottom: 12px;
+}
+
+.comments-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.comments-post-snippet {
+  font-size: 13px;
+  margin-top: 2px;
+  color: #6b7280;
+}
+
+/* Comment form */
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.comment-input {
+  width: 100%;
+  min-height: 70px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.comment-input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.25);
+}
+
+.comment-submit-btn {
+  align-self: flex-end;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: none;
+  background: #4f46e5;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.comment-submit-btn:hover {
+  opacity: 0.9;
+}
+
+/* Comments list */
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment-item {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #6b7280;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comment-body {
+  flex: 1;
+}
+
+/* Meta row: username left, time + delete on the right */
+.comment-meta {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 2px;
+  gap: 6px;
+}
+
+.comment-username {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* push time (and delete) to the right */
+.comment-time {
+  color: #9ca3af;
+  margin-left: auto;
+}
+
+.comment-text {
+  font-size: 14px;
+  color: #374151;
+}
+
+/* Small, subtle delete button */
+.comment-delete-btn {
+  padding: 2px 6px;
+  margin-left: 4px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: #ef4444;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  line-height: 1.2;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.comment-delete-btn:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+}
+
+/* Scrollbar styling just for the comments panel (optional) */
+.comments-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.comments-panel::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 999px;
+}
+
+/* ===== RESPONSIVE for layout with comments ===== */
+@media (max-width: 768px) {
+  .feed-layout {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .comments-panel {
+    position: static;
+    max-height: none;
+    margin-top: 12px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   DARK MODE — FEED PAGE
+   ========================= */
+
+body.theme-dark .feed-page {
+  color: #e5e7eb;
+  height: fit-content;
+}
+
+/* Page title */
+body.theme-dark .feed-title {
+  color: #f9fafb;
+  text-shadow: 0 0 10px rgba(99,102,241,0.35);
+}
+
+/* Feed card */
+body.theme-dark .feed-card {
+  background: linear-gradient(145deg, rgba(99,102,241,0.06), rgba(15,23,42,0.97));
+  border: 1px solid rgba(148,163,184,0.2);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.8);
+}
+
+/* Header row */
+body.theme-dark .feed-card-header {
+  color: #e5e7eb;
+}
+
+/* Avatar */
+body.theme-dark .feed-avatar {
+  background: linear-gradient(135deg, #6366f1, #22c55e);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
+}
+
+/* Username */
+body.theme-dark .feed-username {
+  color: #f9fafb;
+}
+
+/* Follow button */
+body.theme-dark .follow-btn {
+  border-color: #818cf8;
+  color: #93c5fd;
+}
+
+body.theme-dark .follow-btn.following {
+  background: linear-gradient(135deg, #4f46e5, #22c55e);
+  color: #ffffff;
+}
+
+/* Image wrapper */
+body.theme-dark .feed-image-wrapper {
+  background: #020617;
+}
+
+/* Actions buttons */
+body.theme-dark .like-btn,
+body.theme-dark .comment-btn {
+  background: linear-gradient(135deg, #7c3aed, #22c55e);
+  color: #ecfeff;
+  box-shadow: 0 6px 18px rgba(34,197,94,0.35);
+}
+
+body.theme-dark .like-btn.liked {
+  background: linear-gradient(135deg, #dc2626, #7f1d1d);
+  color: #fecaca;
+}
+
+/* Count text */
+body.theme-dark .count-text {
+  color: #9ca3af;
+}
+
+/* Description */
+body.theme-dark .feed-description {
+  color: #cbd5f5;
+}
+
+/* =========================
+   DARK MODE — COMMENTS PANEL
+   ========================= */
+
+body.theme-dark .comments-panel {
+  background: linear-gradient(145deg, rgba(99,102,241,0.08), rgba(15,23,42,0.98));
+  border: 1px solid rgba(148,163,184,0.25);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.85);
+}
+
+/* Header */
+body.theme-dark .comments-header h3 {
+  color: #f9fafb;
+}
+
+body.theme-dark .comments-post-snippet {
+  color: #9ca3af;
+}
+body.theme-dark .comment-form{
+  background: none;
+}
+/* Comment form */
+body.theme-dark .comment-input {
+  background: #020617;
+  border: 1px solid rgba(148,163,184,0.3);
+  color: #e5e7eb;
+}
+
+body.theme-dark .comment-input::placeholder {
+  color: #6b7280;
+}
+
+body.theme-dark .comment-input:focus {
+  border-color: #818cf8;
+  box-shadow: 0 0 0 1px rgba(129,140,248,0.4);
+}
+
+/* Submit button */
+body.theme-dark .comment-submit-btn {
+  background: linear-gradient(135deg, #6366f1, #22c55e);
+}
+
+/* Comment item */
+body.theme-dark .comment-item {
+  border-bottom: 1px solid rgba(75,85,99,0.5);
+}
+
+/* Avatar */
+body.theme-dark .comment-avatar {
+  background: linear-gradient(135deg, #6366f1, #22c55e);
+}
+
+/* Meta */
+body.theme-dark .comment-username {
+  color: #f9fafb;
+}
+
+body.theme-dark .comment-time {
+  color: #9ca3af;
+}
+
+body.theme-dark .comment-text {
+  color: #cbd5f5;
+}
+
+/* Delete button */
+body.theme-dark .comment-delete-btn {
+  color: #f87171;
+}
+
+body.theme-dark .comment-delete-btn:hover {
+  background: rgba(239,68,68,0.15);
+  color: #fecaca;
+}
+
+/* Scrollbar */
+body.theme-dark .comments-panel::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #818cf8, #22c55e);
+}
+
+/* =========================
+   DARK MODE — RESPONSIVE
+   ========================= */
+
+@media (max-width: 640px) {
+  body.theme-dark .feed-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  body.theme-dark .comments-panel {
+    margin-top: 12px;
+    max-height: none;
+  }
+}
+
+
+
+@keyframes bottomtotop {
+  0% {
+    opacity: 0;
+    transform: translateX(-300px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
