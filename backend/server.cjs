@@ -6,7 +6,7 @@ const mysql = require("mysql2/promise");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { body, validationResult } = require("express-validator");
-
+const path = require("path");
 const app = express();
 
 app.use(
@@ -1976,3 +1976,9 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () =>
   console.log(`Server listening on http://localhost:${PORT}`)
 );
+
+app.use(express.static(path.join(__dirname, "../dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
