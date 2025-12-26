@@ -79,11 +79,30 @@ CREATE TABLE notifications (
 );
 select * from notifications;
 
+
+
+CREATE TABLE messages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  sender_id INT NOT NULL,
+  reciever_id INT NOT NULL,
+  message TEXT NOT NULL,
+  is_read TINYINT(1) DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_messages_sender FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
+  CONSTRAINT fk_messages_reciever FOREIGN KEY (reciever_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+
+
+
 -- Useful indexes
 CREATE INDEX idx_posts_user ON posts(user_id);
 CREATE INDEX idx_comments_post ON comments(post_id);
 CREATE INDEX idx_likes_post ON likes(post_id);
 CREATE INDEX idx_notifications_user ON notifications(user_id);
+CREATE INDEX idx_messages_sender ON messages (sender_id);
+CREATE INDEX idx_messages_reciever ON messages (reciever_id);
+CREATE INDEX idx_sender_reciever_created ON messages (sender_id, reciever_id, created_at);
 
 
 
